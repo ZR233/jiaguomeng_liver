@@ -1,6 +1,6 @@
-dim objPoint = ""
-
-
+dim 邮筒坐标 = ""
+dim 蓝星币坐标 = ""
+dim 红心坐标 = ""
 //-------------根据自己情况进行配置-------------
 //想要升级的建筑物坐标
 dim up_building = [3, 2]
@@ -20,16 +20,18 @@ dim 红心与升级按钮y差 = 691
 //-------------原始长度-------------------
 #icon("@res:vc65fskn-gdh2-a99r-2j4u-dhnb04rckj46.png")
 Image.Click({"wnd":[{"cls":"Shell_TrayWnd","app":"explorer"}]},{"x":0,"y":0,"width":0,"height":0},@res"vc65fskn-gdh2-a99r-2j4u-dhnb04rckj46.png",0.9,"left","click",10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"bSetForeground":true,"sCursorPosition":"Center","iCursorOffsetX":0,"iCursorOffsetY":0,"sKeyModifiers":[],"sSimulate":"simulate"})
-#icon("@res:615r0vg1-rgr3-gl6r-31ke-e4rfvgl59skm.png")
-dim 蓝星币坐标 = Image.Find({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"615r0vg1-rgr3-gl6r-31ke-e4rfvgl59skm.png",0.9,10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"sCursorPosition":"Center","bSetForeground":true})
+
+
+#icon("@res:qpfo42c0-94m4-8e6g-9h8i-3aprq1jq11em.png")
+蓝星币坐标 = Image.Find({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"qpfo42c0-94m4-8e6g-9h8i-3aprq1jq11em.png",0.9,10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"sCursorPosition":"Center","bSetForeground":true})
 TracePrint(蓝星币坐标)
-#icon("@res:opnv3os8-p7al-jagd-phdl-abiafchma2sk.png")
-dim 红心坐标 = Image.Find({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"opnv3os8-p7al-jagd-phdl-abiafchma2sk.png",0.9,10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"sCursorPosition":"Center","bSetForeground":true})
+#icon("@res:3t58gab2-ondk-5dug-3b30-c28nncplf3tg.png")
+红心坐标 = Image.Find({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"3t58gab2-ondk-5dug-3b30-c28nncplf3tg.png",0.9,10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"sCursorPosition":"Center","bSetForeground":true})
 TracePrint(红心坐标)
 dim 当前蓝星币与红心X坐标差 = 红心坐标["x"] - 蓝星币坐标["x"]
 
-#icon("@res:bmc6n28a-l38g-ro6o-21h2-pu59mdq0lk1g.png")
-objPoint = Image.Find({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"rn9ittma-17en-mfft-o2se-ncip2gudjgf5.png",0.9,10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"sCursorPosition":"Center","bSetForeground":true})
+#icon("@res:ns7udj27-f7g3-2ebp-dq18-2destandbtmi.png")
+邮筒坐标 = Image.Find({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"ns7udj27-f7g3-2ebp-dq18-2destandbtmi.png",0.9,10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"sCursorPosition":"Center","bSetForeground":true})
 
 当前蓝星币与红心X坐标差 = CNumber(当前蓝星币与红心X坐标差)
 //缩放率
@@ -42,8 +44,8 @@ mailbox_y_and_y33 = CInt(mailbox_y_and_y33 * rate)
 
 
 
-dim mailbox_x = objPoint["x"]
-dim mailbox_y = objPoint["y"]
+dim mailbox_x = 邮筒坐标["x"]
+dim mailbox_y = 邮筒坐标["y"]
 
 dim x13 = mailbox_x + mailbox_x_and_x33
 dim y13 = mailbox_y + mailbox_y_and_y33
