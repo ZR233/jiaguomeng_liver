@@ -1,2 +1,4 @@
 # jiaguomeng_liver
-你太想上进了-……-
+安装uibot
+打开项目
+f5执行
