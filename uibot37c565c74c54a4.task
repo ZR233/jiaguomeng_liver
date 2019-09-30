@@ -1,0 +1,89 @@
+dim objPoint = ""
+
+
+//-------------根据自己情况进行配置-------------
+//建筑间隔
+dim my_interval = 105
+//想要升级的建筑物坐标
+dim up_building = [1, 3]
+//-------------根据自己情况进行配置-------------
+
+
+dim interval = 105
+//两列建筑纵坐标差
+dim y_offset = 52
+//邮筒到地块33的坐标差
+dim mailbox_x_and_x33 = 264
+dim mailbox_y_and_y33 = 70
+
+#icon("@res:vc65fskn-gdh2-a99r-2j4u-dhnb04rckj46.png")
+Image.Click({"wnd":[{"cls":"Shell_TrayWnd","app":"explorer"}]},{"x":0,"y":0,"width":0,"height":0},@res"vc65fskn-gdh2-a99r-2j4u-dhnb04rckj46.png",0.9,"left","click",10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"bSetForeground":true,"sCursorPosition":"Center","iCursorOffsetX":0,"iCursorOffsetY":0,"sKeyModifiers":[],"sSimulate":"simulate"})
+#icon("@res:bmc6n28a-l38g-ro6o-21h2-pu59mdq0lk1g.png")
+objPoint = Image.Find({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"rn9ittma-17en-mfft-o2se-ncip2gudjgf5.png",0.9,10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"sCursorPosition":"Center","bSetForeground":true})
+
+my_interval = CNumber(my_interval)
+//缩放率
+dim rate = my_interval / interval
+
+interval = CInt(interval * rate)
+y_offset = CInt(y_offset * rate)
+mailbox_x_and_x33 = CInt(mailbox_x_and_x33 * rate)
+mailbox_y_and_y33 = CInt(mailbox_y_and_y33 * rate)
+
+
+
+dim mailbox_x = objPoint["x"]
+dim mailbox_y = objPoint["y"]
+
+dim x13 = mailbox_x + mailbox_x_and_x33
+dim y13 = mailbox_y + mailbox_y_and_y33
+
+dim x11 = x13-2*interval
+dim y11 = y13+2*y_offset
+
+dim x31 = x11
+dim y31 = y11+2*interval
+
+dim x33 = x13
+dim y33 = y13+2*interval
+
+dim x23 = x13
+dim y23 = y13+interval
+dim x22 = x11+interval
+dim y22 = y11+interval-y_offset
+
+dim up_building_x = x11 + (up_building[1]-1) * interval
+dim up_building_y = y11 + (up_building[0]-1) * interval - (up_building[1]-1) * y_offset
+
+
+Function 收钱()
+    Mouse.Drag(x13, y13, x11, y11, "left", [])
+    Mouse.Drag(x11, y11, x31, y31, "left", [])
+    Mouse.Drag(x31, y31, x33, y33, "left", [])
+    Mouse.Drag(x33, y33, x23, y23, "left", [])
+    Mouse.Drag(x23, y23, x22, y22, "left", [])
+End Function
+
+Function 升级建筑(x, y)
+    #icon("@res:2mvo4um6-kvik-mdmt-6plm-ue2fq30nd7h8.png")
+    Image.Click({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"2mvo4um6-kvik-mdmt-6plm-ue2fq30nd7h8.png",0.9,"left","click",30000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"bSetForeground":true,"sCursorPosition":"Center","iCursorOffsetX":0,"iCursorOffsetY":0,"sKeyModifiers":[],"sSimulate":"default"})
+    
+    Mouse.Move(x, y, false)
+    Mouse.Click("left", "click", [])
+    For i = 0 To 10 step 1 
+
+    #icon("@res:g5v0f0v5-snc0-me6i-qg0k-rbqdk1hfj8dd.png")
+    Image.Click({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"g5v0f0v5-snc0-me6i-qg0k-rbqdk1hfj8dd.png",0.9,"left","click",30000,{"bContinueOnError":false,"iDelayAfter":100,"iDelayBefore":100,"bSetForeground":true,"sCursorPosition":"Center","iCursorOffsetX":0,"iCursorOffsetY":0,"sKeyModifiers":[],"sSimulate":"default"})
+            
+        Next
+    #icon("@res:034aiv94-7r3o-4hso-ugvu-820o3qerhq51.png")
+    Image.Click({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"034aiv94-7r3o-4hso-ugvu-820o3qerhq51.png",0.9,"left","click",30000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"bSetForeground":true,"sCursorPosition":"Center","iCursorOffsetX":0,"iCursorOffsetY":0,"sKeyModifiers":[],"sSimulate":"default"})
+End Function
+
+Do While true
+    For i = 0 To 5 step 1 
+        收钱()
+    Next
+    升级建筑(up_building_x, up_building_y)
+Loop
+

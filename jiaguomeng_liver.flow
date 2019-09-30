@@ -1,0 +1,1 @@
+{"uuid":"37c577e386632e","flow":[{"rem":"uibot37c577e3867190","type":"begin","next":"uibot37c577e39623a0","x":0,"y":10},{"rem":"uibot37c577e39623a0","type":"task","desc":"流程块1","in":"","out":"","file":"uibot37c565c74c54a4.task","next":"","x":0,"y":100}]}
