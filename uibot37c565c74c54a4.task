@@ -2,28 +2,38 @@ dim objPoint = ""
 
 
 //-------------根据自己情况进行配置-------------
-//建筑间隔
-dim my_interval = 105
 //想要升级的建筑物坐标
-dim up_building = [1, 3]
+dim up_building = [3, 2]
 //-------------根据自己情况进行配置-------------
 
-
+//-------------原始长度-------------------
 dim interval = 105
 //两列建筑纵坐标差
 dim y_offset = 52
 //邮筒到地块33的坐标差
 dim mailbox_x_and_x33 = 264
 dim mailbox_y_and_y33 = 70
-
+dim 蓝星币与红心X坐标差 = 127
+dim x33与升级标签x差 = 72
+dim y33与升级标签y差 = 63
+dim 红心与升级按钮y差 = 691
+//-------------原始长度-------------------
 #icon("@res:vc65fskn-gdh2-a99r-2j4u-dhnb04rckj46.png")
 Image.Click({"wnd":[{"cls":"Shell_TrayWnd","app":"explorer"}]},{"x":0,"y":0,"width":0,"height":0},@res"vc65fskn-gdh2-a99r-2j4u-dhnb04rckj46.png",0.9,"left","click",10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"bSetForeground":true,"sCursorPosition":"Center","iCursorOffsetX":0,"iCursorOffsetY":0,"sKeyModifiers":[],"sSimulate":"simulate"})
+#icon("@res:615r0vg1-rgr3-gl6r-31ke-e4rfvgl59skm.png")
+dim 蓝星币坐标 = Image.Find({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"615r0vg1-rgr3-gl6r-31ke-e4rfvgl59skm.png",0.9,10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"sCursorPosition":"Center","bSetForeground":true})
+TracePrint(蓝星币坐标)
+#icon("@res:opnv3os8-p7al-jagd-phdl-abiafchma2sk.png")
+dim 红心坐标 = Image.Find({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"opnv3os8-p7al-jagd-phdl-abiafchma2sk.png",0.9,10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"sCursorPosition":"Center","bSetForeground":true})
+TracePrint(红心坐标)
+dim 当前蓝星币与红心X坐标差 = 红心坐标["x"] - 蓝星币坐标["x"]
+
 #icon("@res:bmc6n28a-l38g-ro6o-21h2-pu59mdq0lk1g.png")
 objPoint = Image.Find({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"rn9ittma-17en-mfft-o2se-ncip2gudjgf5.png",0.9,10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"sCursorPosition":"Center","bSetForeground":true})
 
-my_interval = CNumber(my_interval)
+当前蓝星币与红心X坐标差 = CNumber(当前蓝星币与红心X坐标差)
 //缩放率
-dim rate = my_interval / interval
+dim rate = 当前蓝星币与红心X坐标差 / 蓝星币与红心X坐标差
 
 interval = CInt(interval * rate)
 y_offset = CInt(y_offset * rate)
@@ -55,7 +65,10 @@ dim y22 = y11+interval-y_offset
 dim up_building_x = x11 + (up_building[1]-1) * interval
 dim up_building_y = y11 + (up_building[0]-1) * interval - (up_building[1]-1) * y_offset
 
-
+dim 升级标签x = x33 + CInt(x33与升级标签x差 * rate)
+dim 升级标签y = y33 + CInt(y33与升级标签y差 * rate)
+dim 升级按钮x = 红心坐标["x"]
+dim 升级按钮y = 红心坐标["y"] + CInt(红心与升级按钮y差 * rate)
 Function 收钱()
     Mouse.Drag(x13, y13, x11, y11, "left", [])
     Mouse.Drag(x11, y11, x31, y31, "left", [])
@@ -65,19 +78,26 @@ Function 收钱()
 End Function
 
 Function 升级建筑(x, y)
-    #icon("@res:2mvo4um6-kvik-mdmt-6plm-ue2fq30nd7h8.png")
-    Image.Click({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"2mvo4um6-kvik-mdmt-6plm-ue2fq30nd7h8.png",0.9,"left","click",30000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"bSetForeground":true,"sCursorPosition":"Center","iCursorOffsetX":0,"iCursorOffsetY":0,"sKeyModifiers":[],"sSimulate":"default"})
-    
+    // 点击升级标签
+    Mouse.Move(升级标签x, 升级标签y, false)
+    Mouse.Click("left", "click", [])
+    Delay(200)
+
+    //点击建筑物
     Mouse.Move(x, y, false)
     Mouse.Click("left", "click", [])
-    For i = 0 To 10 step 1 
-
-    #icon("@res:g5v0f0v5-snc0-me6i-qg0k-rbqdk1hfj8dd.png")
-    Image.Click({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"g5v0f0v5-snc0-me6i-qg0k-rbqdk1hfj8dd.png",0.9,"left","click",30000,{"bContinueOnError":false,"iDelayAfter":100,"iDelayBefore":100,"bSetForeground":true,"sCursorPosition":"Center","iCursorOffsetX":0,"iCursorOffsetY":0,"sKeyModifiers":[],"sSimulate":"default"})
-            
-        Next
-    #icon("@res:034aiv94-7r3o-4hso-ugvu-820o3qerhq51.png")
-    Image.Click({"wnd":[{"cls":"TXGuiFoundation","title":"腾讯手游助手【极速傲引擎】","app":"AndroidEmulator"}]},{"x":0,"y":0,"width":0,"height":0},@res"034aiv94-7r3o-4hso-ugvu-820o3qerhq51.png",0.9,"left","click",30000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"bSetForeground":true,"sCursorPosition":"Center","iCursorOffsetX":0,"iCursorOffsetY":0,"sKeyModifiers":[],"sSimulate":"default"})
+    Delay(500)
+    For i = 0 To 3 step 1 
+        //升级
+        Mouse.Move(升级按钮x, 升级按钮y, false)
+        Delay(200)
+        Mouse.Click("left", "click", [])
+        Delay(200)
+    Next
+    
+    Mouse.Move(升级标签x, 升级标签y, false)
+    Mouse.Click("left", "click", [])
+    Delay(200)
 End Function
 
 Do While true
