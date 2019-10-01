@@ -13,13 +13,13 @@ dim interval = 96
 //两列建筑纵坐标差
 dim y_offset = 49
 
-dim 红心到建筑33距离x = -5
-dim 红心到建筑33距离y = 160
+dim 红心到建筑33距离x = -1
+dim 红心到建筑33距离y = 140
 
 dim 蓝星币与红心X坐标差 = 115
-dim x33与升级标签x差 = 65
-dim y33与升级标签y差 = 56
-dim 红心与升级按钮y差 = 623
+dim x33与升级标签x差 = 64
+dim y33与升级标签y差 = 72
+dim 红心与升级按钮y差 = 606
 
 dim 车厢1相对红心坐标x = - 58
 dim 车厢1相对红心坐标y = 583
@@ -81,6 +81,9 @@ Function 获取建筑坐标(矩阵位置数组)
     Return 坐标
 End Function
 
+dim 建筑21 = 获取建筑坐标([2,1])
+dim x21 = 建筑21["x"]
+dim y21 = 建筑21["y"]
 dim 车厢1坐标x = 红心坐标["x"] + 车厢1相对红心坐标x
 dim 车厢1坐标y = 红心坐标["y"] + 车厢1相对红心坐标y
 
@@ -118,7 +121,8 @@ dim 升级按钮x = 红心坐标["x"]
 dim 升级按钮y = 红心坐标["y"] + 红心与升级按钮y差
 Function 收钱()
     Mouse.Drag(x13, y13, x11, y11, "left", [])
-    Mouse.Drag(x11, y11, x31, y31, "left", [])
+    Mouse.Drag(x11, y11, x21, y21, "left", [])
+    Mouse.Drag(x21, y21, x31, y31, "left", [])
     Mouse.Drag(x31, y31, x33, y33, "left", [])
     Mouse.Drag(x33, y33, x23, y23, "left", [])
     Mouse.Drag(x23, y23, x22, y22, "left", [])
